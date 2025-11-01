@@ -8,25 +8,26 @@
 
 ## 👤 USERS
 
-| Field                            | Type                                  | Constraints       | Description                                |
-|----------------------------------|---------------------------------------|-------------------|--------------------------------------------|
-| id                               | UUID                                  | PK                | Unique user identifier                     |
-| username                         | VARCHAR(50)                           | UNIQUE, NOT NULL  | Login name                                 |
-| email                            | CITEXT                                | UNIQUE, NOT NULL  | Email (case-insensitive)                   |
-| password_hash                    | TEXT                                  | NOT NULL          | BCrypt hash                                |
-| full_name                        | VARCHAR(200)                          |                   | User’s full name                           |
-| bio                              | TEXT                                  |                   | Profile bio                                |
-| email_verification_code          | VARCHAR(6)                            |                   | email verification code                    |
-| email_verification_code_expireAt | TIMESTAMPTZ                           |                   | time that email verification code expire   |
-| status                           | ENUM(active,disabled,pending,banned)  | DEFAULT 'pending' | Account state                              |
-| email_verified                   | BOOLEAN                               | DEFAULT FALSE     | Email verification status                  |
-| avatar_url                       | TEXT                                  |                   | Profile image                              |
-| metadata                         | JSONB                                 |                   | Additional flexible data                   |
-| password_reset_token             | TEXT                                  |                   | for forgot password to reset via emil      |
-| password_reset_token_expireAt    | TIMESTAMPTZ                           |                   | time that reset password token code expire |
-| created_at                       | TIMESTAMPTZ                           | DEFAULT now()     | Created timestamp                          |
-| updated_at                       | TIMESTAMPTZ                           | DEFAULT now()     | Updated timestamp                          |
-| last_login_at                    | TIMESTAMPTZ                           |                   | Last login                                 |
+| Field                            | Type                                 | Constraints       | Description                                |
+|----------------------------------|--------------------------------------|-------------------|--------------------------------------------|
+| id                               | UUID                                 | PK                | Unique user identifier                     |
+| username                         | VARCHAR(50)                          | UNIQUE, NOT NULL  | Login name                                 |
+| email                            | CITEXT                               | UNIQUE, NOT NULL  | Email (case-insensitive)                   |
+| password_hash                    | TEXT                                 | NOT NULL          | BCrypt hash                                |
+| first_name                       | VARCHAR(70)                          | NOT NULL          | User’s first name                          |
+| last_name                        | VARCHAR(70)                          | NOT NULL          | User’s last name                           |
+| bio                              | TEXT                                 |                   | Profile bio                                |
+| email_verification_code          | VARCHAR(6)                           |                   | email verification code                    |
+| email_verification_code_expireAt | TIMESTAMPTZ                          |                   | time that email verification code expire   |
+| status                           | ENUM(active,disabled,pending,banned) | DEFAULT 'pending' | Account state                              |
+| email_verified                   | BOOLEAN                              | DEFAULT FALSE     | Email verification status                  |
+| avatar_url                       | TEXT                                 |                   | Profile image                              |
+| metadata                         | JSONB                                |                   | Additional flexible data                   |
+| password_reset_token             | TEXT                                 |                   | for forgot password to reset via emil      |
+| password_reset_token_expireAt    | TIMESTAMPTZ                          |                   | time that reset password token code expire |
+| created_at                       | TIMESTAMPTZ                          | DEFAULT now()     | Created timestamp                          |
+| updated_at                       | TIMESTAMPTZ                          | DEFAULT now()     | Updated timestamp                          |
+| last_login_at                    | TIMESTAMPTZ                          |                   | Last login                                 |
 
 **Relations:**
 
