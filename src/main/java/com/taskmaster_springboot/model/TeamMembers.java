@@ -3,13 +3,12 @@ package com.taskmaster_springboot.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.taskmaster_springboot.model.enums.TeamRole;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 
-import com.taskmaster_springboot.model.TeamMembersId; // Imported TeamMembersId from separate file
 
 @Data
 @Entity(name = "team_members")
