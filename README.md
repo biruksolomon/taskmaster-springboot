@@ -1,4 +1,4 @@
-#  TaskMaster — Multi-User Task Management System (Spring Boot 3 + MySQL)
+#  TaskMaster — Multi-User Task Management System (Spring Boot 3 + PostgreSQL)
 
 TaskMaster is a **backend API** built with **Java Spring Boot 3**, designed to manage **projects, tasks, teams, and roles** efficiently.  
 It provides secure authentication, email communication, and real-time collaboration — all built with clean RESTful architecture.  

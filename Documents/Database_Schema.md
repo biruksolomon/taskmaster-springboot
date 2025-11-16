@@ -1,6 +1,6 @@
 # 🏗️ TaskMaster Database Schema (Design View)
 
-**Database:** MySQL  
+**Database:** PostgreSQL  
 **Architecture:** Multi-tenant (Teams → Projects → Tasks)  
 **Core Entities:** User, Role, Team, Project, Task, Comment, Notification, Invitation, ActivityLog
 
