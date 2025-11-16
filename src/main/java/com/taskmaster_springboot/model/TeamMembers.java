@@ -3,24 +3,29 @@ package com.taskmaster_springboot.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.taskmaster_springboot.model.enums.TeamRole;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.Instant;
-import java.util.UUID;
+
+import com.taskmaster_springboot.model.TeamMembersId; // Imported TeamMembersId from separate file
 
 @Data
 @Entity(name = "team_members")
+@NoArgsConstructor
 public class TeamMembers {
 
-    @Id
+    @EmbeddedId
+    private TeamMembersId id;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "team_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "team_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
     @JsonIgnore
     private Teams team;
 
-    @Id
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
     @JsonIgnore
     private Users user;
 

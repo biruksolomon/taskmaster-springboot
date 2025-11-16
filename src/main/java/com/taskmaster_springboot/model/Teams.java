@@ -16,7 +16,7 @@ import java.util.UUID;
 public class Teams {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
@@ -50,8 +50,7 @@ public class Teams {
     @Column(name = "archived", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
     private Boolean archived = false;
 
-    @ManyToMany(mappedBy = "team")
-    @JsonIgnore
+    @ManyToMany(mappedBy = "teams")
     private Set<Users> members = new HashSet<>();
 
 
