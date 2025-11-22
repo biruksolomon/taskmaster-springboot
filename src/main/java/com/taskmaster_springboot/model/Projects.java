@@ -33,15 +33,15 @@ public class Projects {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "description", columnDefinition = "TEXT")
+    @Column(name = "description")
     private String description;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false, columnDefinition = "VARCHAR(20) DEFAULT 'planned'")
+    @Column(name = "status", nullable = false, length = 20)
     private ProjectStatus status = ProjectStatus.PLANNED;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "visibility", nullable = false, columnDefinition = "VARCHAR(20) DEFAULT 'private'")
+    @Column(name = "visibility", nullable = false)
     private ProjectVisibility visibility = ProjectVisibility.PRIVATE;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -60,8 +60,7 @@ public class Projects {
     @Column(name = "due_date")
     private LocalDate dueDate;
 
-    @Lob
-    @Column(name = "metadata", columnDefinition = "JSONB")
+    @Column(name = "metadata", columnDefinition = "jsonb")
     private String metadata;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -69,13 +68,13 @@ public class Projects {
     @JsonIgnore
     private Users createdBy;
 
-    @Column(name = "created_at", nullable = false, updatable = false, columnDefinition = "TIMESTAMPTZ DEFAULT NOW()")
+    @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
 
-    @Column(name = "updated_at", nullable = false, columnDefinition = "TIMESTAMPTZ DEFAULT NOW()")
+    @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
-    @Column(name = "archived", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
+    @Column(name = "archived", nullable = false)
     private Boolean archived = false;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)

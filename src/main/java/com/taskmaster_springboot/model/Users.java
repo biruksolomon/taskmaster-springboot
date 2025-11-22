@@ -58,7 +58,7 @@ public class Users {
     private Instant emailVerificationCodeExpireAt;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false, columnDefinition = "VARCHAR(20) DEFAULT 'pending'")
+    @Column(name = "status", nullable = false)
     private AccountStatus status = AccountStatus.PENDING;
 
     @Column(name = "email_verified", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
@@ -67,9 +67,8 @@ public class Users {
     @Column(name = "avatar_url")
     private String avatarUrl;
 
-    @Lob
-    @Column(name = "metadata")
-    private String metadata; // Store additional flexible data
+    @Column(name = "metadata", columnDefinition = "jsonb")
+    private String metadata;
 
     @Column(name = "password_reset_token")
     private String passwordResetToken;

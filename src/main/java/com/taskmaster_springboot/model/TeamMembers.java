@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 
-
 @Data
 @Entity(name = "team_members")
 @NoArgsConstructor
@@ -19,29 +18,43 @@ public class TeamMembers {
     private TeamMembersId id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "team_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(
+            name = "team_id",
+            referencedColumnName = "id",
+            nullable = false,
+            insertable = false,
+            updatable = false
+    )
     @JsonIgnore
     private Teams team;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(
+            name = "user_id",
+            referencedColumnName = "id",
+            nullable = false,
+            insertable = false,
+            updatable = false
+    )
     @JsonIgnore
     private Users user;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "role", nullable = false, columnDefinition = "VARCHAR(20) DEFAULT 'member'")
-    private TeamRole role = TeamRole.MEMBER;
+    @Column(name = "role", nullable = false, length = 20)
+    private TeamRole role = TeamRole.MEMBER; // Default role
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "invited_by", referencedColumnName = "id")
     @JsonIgnore
     private Users invitedBy;
 
-    @Column(name = "joined_at", nullable = false, updatable = false, columnDefinition = "TIMESTAMPTZ DEFAULT NOW()")
+    @Column(name = "joined_at", nullable = false, updatable = false)
     private Instant joinedAt;
 
     @PrePersist
     protected void onJoin() {
-        this.joinedAt = Instant.now();
+        if (this.joinedAt == null) {
+            this.joinedAt = Instant.now();
+        }
     }
 }

@@ -14,7 +14,11 @@ public class ActivityLogs {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "activity_logs_seq")
-    @SequenceGenerator(name = "activity_logs_seq", sequenceName = "activity_logs_seq", allocationSize = 1)
+    @SequenceGenerator(
+            name = "activity_logs_seq",
+            sequenceName = "activity_logs_seq",
+            allocationSize = 1
+    )
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
@@ -37,17 +41,19 @@ public class ActivityLogs {
     @Column(name = "data", columnDefinition = "JSONB")
     private String data;
 
-    @Column(name = "ip")
+    @Column(name = "ip", length = 64)
     private String ip;
 
-    @Column(name = "user_agent", columnDefinition = "TEXT")
+    @Column(name = "user_agent")
     private String userAgent;
 
-    @Column(name = "created_at", nullable = false, updatable = false, columnDefinition = "TIMESTAMPTZ DEFAULT NOW()")
+    @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
 
     @PrePersist
     protected void onCreate() {
-        this.createdAt = Instant.now();
+        if (this.createdAt == null) {
+            this.createdAt = Instant.now();
+        }
     }
 }

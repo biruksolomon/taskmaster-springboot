@@ -29,7 +29,7 @@ public class Teams {
     @Column(name = "slug", unique = true)
     private String slug;
 
-    @Column(name = "description", columnDefinition = "TEXT")
+    @Column(name = "description")
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -37,17 +37,16 @@ public class Teams {
     @JsonIgnore
     private Users createdBy;
 
-    @Lob
-    @Column(name = "metadata", columnDefinition = "JSONB")
-    private String metadata; // Can store JSON structure as string
+    @Column(name = "metadata", columnDefinition = "jsonb")
+    private String metadata;
 
-    @Column(name = "created_at", nullable = false, updatable = false, columnDefinition = "TIMESTAMPTZ DEFAULT NOW()")
+    @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
 
-    @Column(name = "updated_at", nullable = false, columnDefinition = "TIMESTAMPTZ DEFAULT NOW()")
+    @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
-    @Column(name = "archived", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
+    @Column(name = "archived", nullable = false)
     private Boolean archived = false;
 
     @ManyToMany(mappedBy = "teams")

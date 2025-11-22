@@ -33,17 +33,17 @@ public class Notifications {
     private NotificationType type;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "channel", nullable = false, columnDefinition = "VARCHAR(50) DEFAULT 'websocket'")
+    @Column(name = "channel", nullable = false, length = 50)
     private NotificationChannel channel = NotificationChannel.WEBSOCKET;
 
     @Lob
     @Column(name = "payload", columnDefinition = "JSONB")
     private String payload;
 
-    @Column(name = "is_read", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
+    @Column(name = "is_read", nullable = false)
     private Boolean isRead = false;
 
-    @Column(name = "created_at", nullable = false, updatable = false, columnDefinition = "TIMESTAMPTZ DEFAULT NOW()")
+    @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
 
     @PrePersist

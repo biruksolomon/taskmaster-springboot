@@ -43,8 +43,8 @@ public class Invitations {
     private UUID token;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false, columnDefinition = "VARCHAR(50) DEFAULT 'pending'")
-    private InvitationStatus status = InvitationStatus.PENDING;
+    @Column(name = "status", length = 20, nullable = false)
+    private InvitationStatus status;
 
     @Column(name = "role", length = 64)
     private String role;
@@ -52,13 +52,16 @@ public class Invitations {
     @Column(name = "expires_at")
     private Instant expiresAt;
 
-    @Column(name = "created_at", nullable = false, updatable = false, columnDefinition = "TIMESTAMPTZ DEFAULT NOW()")
+    @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
 
     @PrePersist
     protected void onCreate() {
         if (this.token == null) {
             this.token = UUID.randomUUID();
+        }
+        if (this.status == null) {
+            this.status = InvitationStatus.PENDING; // Default status here
         }
         this.createdAt = Instant.now();
     }

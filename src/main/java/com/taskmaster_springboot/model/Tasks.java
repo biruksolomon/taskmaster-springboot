@@ -11,6 +11,7 @@ import lombok.Data;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -38,15 +39,15 @@ public class Tasks {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "description", columnDefinition = "TEXT")
+    @Column(name = "description")
     private String description;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false, columnDefinition = "VARCHAR(20) DEFAULT 'todo'")
+    @Column(name = "status", nullable = false)
     private TaskStatus status = TaskStatus.TODO;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "priority", nullable = false, columnDefinition = "VARCHAR(20) DEFAULT 'medium'")
+    @Column(name = "priority", nullable = false)
     private TaskPriority priority = TaskPriority.MEDIUM;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -67,7 +68,7 @@ public class Tasks {
     @Column(name = "estimate_minutes")
     private Integer estimateMinutes;
 
-    @Column(name = "time_spent_minutes", nullable = false, columnDefinition = "INT DEFAULT 0")
+    @Column(name = "time_spent_minutes", nullable = false)
     private Integer timeSpentMinutes = 0;
 
     @Column(name = "start_date")
@@ -76,11 +77,10 @@ public class Tasks {
     @Column(name = "due_date")
     private LocalDate dueDate;
 
-    @Column(name = "tags", columnDefinition = "TEXT[]")
-    private String[] tags;
+    @Column(name = "tags")
+    private List<String> tags;
 
-    @Lob
-    @Column(name = "custom_fields", columnDefinition = "JSONB")
+    @Column(name = "custom_fields", columnDefinition = "jsonb")
     private String customFields;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -88,13 +88,13 @@ public class Tasks {
     @JsonIgnore
     private Users createdBy;
 
-    @Column(name = "created_at", nullable = false, updatable = false, columnDefinition = "TIMESTAMPTZ DEFAULT NOW()")
+    @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
 
-    @Column(name = "updated_at", nullable = false, columnDefinition = "TIMESTAMPTZ DEFAULT NOW()")
+    @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
-    @Column(name = "archived", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
+    @Column(name = "archived", nullable = false)
     private Boolean archived = false;
 
     @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
