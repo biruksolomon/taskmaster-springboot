@@ -99,5 +99,17 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
+    @Override
+    public void updateLastLogin(String email) {
+        Users user = usersRepository.findByEmail(email);
+
+        if (user == null) {
+            throw new IllegalArgumentException("User not found with email: " + email);
+        }
+
+        user.setLastLoginAt(Instant.now());
+        usersRepository.save(user);
+    }
+
 
 }

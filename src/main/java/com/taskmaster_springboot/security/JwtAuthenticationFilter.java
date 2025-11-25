@@ -1,6 +1,5 @@
 package com.taskmaster_springboot.security;
 
-
 import com.taskmaster_springboot.service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -27,8 +26,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
     private final CustomDetailService userDetailsService;
 
-    // Public endpoints that don't require authentication
     private static final List<String> PUBLIC_ENDPOINTS = Arrays.asList(
+            "/",
+            "/auth/register",
+            "/auth/login",
+            "/auth/verify-token",
+            "/auth/forgot-password",
+            "/auth/reset-password",
+            "/swagger-ui",
+            "/v3/api-docs",
+            "/webjars"
     );
 
     @Override
@@ -125,7 +132,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     /**
-     * Check if the given path is public
+     * Check if the given path is public - matches prefix for public endpoints
      */
     private boolean isPublicEndpoint(String path) {
         if (path == null) return false;
