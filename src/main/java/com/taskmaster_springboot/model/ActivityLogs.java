@@ -3,13 +3,15 @@ package com.taskmaster_springboot.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Data;
+import lombok.*;
 
 import java.time.Instant;
 import java.util.UUID;
 
 @Data
 @Entity(name = "activity_logs")
+@Builder
+@AllArgsConstructor
 public class ActivityLogs {
 
     @Id
@@ -49,6 +51,10 @@ public class ActivityLogs {
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
+
+    public ActivityLogs() {
+
+    }
 
     @PrePersist
     protected void onCreate() {

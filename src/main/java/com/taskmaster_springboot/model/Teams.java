@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.Data;
+import lombok.*;
 
 import java.time.Instant;
 import java.util.HashSet;
@@ -13,6 +13,8 @@ import java.util.UUID;
 
 @Data
 @Entity(name = "teams")
+@Builder
+@AllArgsConstructor
 public class Teams {
 
     @Id
@@ -51,6 +53,10 @@ public class Teams {
 
     @ManyToMany(mappedBy = "teams")
     private Set<Users> members = new HashSet<>();
+
+    public Teams() {
+
+    }
 
 
     @PrePersist
