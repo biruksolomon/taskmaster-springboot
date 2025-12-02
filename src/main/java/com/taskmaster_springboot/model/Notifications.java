@@ -4,13 +4,19 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.taskmaster_springboot.model.enums.NotificationChannel;
 import com.taskmaster_springboot.model.enums.NotificationType;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 import java.util.UUID;
 
 @Data
 @Entity(name = "notifications")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Notifications {
 
     @Id

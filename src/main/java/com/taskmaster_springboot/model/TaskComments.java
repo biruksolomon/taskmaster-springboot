@@ -3,7 +3,10 @@ package com.taskmaster_springboot.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 import java.util.HashSet;
@@ -12,6 +15,9 @@ import java.util.UUID;
 
 @Data
 @Entity(name = "task_comments")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class TaskComments {
 
     @Id

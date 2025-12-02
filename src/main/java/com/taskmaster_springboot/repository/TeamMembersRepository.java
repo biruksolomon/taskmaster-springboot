@@ -12,6 +12,7 @@ import java.util.UUID;
 
 @Repository
 public interface TeamMembersRepository extends JpaRepository<TeamMembers, TeamMembersId> {
-    @Query("select tm from team_members  tm where team_members .user.userId=:userid")
-    List<TeamMembers> findByUserId(@Param("userid") UUID userId);
+    @Query("SELECT tm FROM team_members tm WHERE tm.user.userId = :userid")
+    List<TeamMembers> findByUserId(@Param("userid") UUID userid);
 }
+
